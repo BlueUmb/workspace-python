@@ -1,5 +1,21 @@
 # ezen02-1
 # 파이썬 기초 코딩
+
+
+'''
+    python -m venv 가상환경이름
+    
+        Scripts\activate.bat        가상환경 진입
+        Scripts\deactivate.bat      가상환경 해제
+        
+    pip install simplejson
+        show
+        unistall
+        list
+        
+    command :  code
+'''
+
 # 파이썬 기본 입출력
 '''
     1. print(값)
