@@ -12,7 +12,9 @@
 
 '''
 import pandas as pd
+import time
 
+import time
 df = pd.DataFrame()
 print(type(df))
 
@@ -70,4 +72,103 @@ print(soccer_team)
 
 
 # 구구단 출력 (for문)
+start = time.time()
+for i in range(1,10):
+    for j in range(2,10):  
+        print("{} X {} = {}".format(j,i,i*j),  end="\t")
+    print()
 
+print()
+
+i = 1
+while i<10:
+    j = 2
+    while j<10:
+        print("{} X {} = {}".format(j,i,i*j),  end="\t")
+        j += 1
+    print()
+    i += 1
+    
+print()
+
+'''
+    얼마나 시간이 걸리고 개수가 몇개인지 확인하시오.
+    - for 문을 이용하여 1부터 1000000까지의 숫자중에서 3의 배수인 숫자들을 찾고,
+    몇개가 있는지 알아보자.
+    - 이 코드를 수행하는데 걸린 시간을 확인해보자.
+'''
+start = time.time()
+ls =[]
+for i in range(1,1000000+1):
+    if i % 3 == 0:
+        ls.append(i)
+     
+print(f"리스트 갯수 : {len(ls)}")
+print(f"소요시간 : {time.time()-start}")
+
+print()
+
+start = time.time()
+i = 1
+while i<10:
+    j = 2
+    while j<10:
+        print("{} X {} = {}".format(j,i,i*j),  end="\t")
+        j += 1
+    print()
+    i += 1
+print(f"소요시간 : {time.time()-start}") 
+print()
+
+'''
+    도준이가 5000원 이상 소지하고 있을 경우 택시를 타고 집에 귀가할수 있지만,
+    걸어서 귀가할 수도 있습니다.
+    택시를 탈 경우, 3000원이 소비됩니다. 잔액 표시
+    
+    2000원 이상 있을 경우 버스를 타고 귀가할수 있습니다.
+    버스를 탈 경우, 1000원이 소비됩니다.
+
+    2000원 미만일 경우 걸어서 귀가할수 있습니다.
+    위 조건을 반영하는 코드를 작성하시오.
+'''
+
+money = 5000
+taxi = True
+
+if money >= 5000:
+    if taxi:
+        print("택시를 타고 귀가합니다")
+        print(f"현재 잔액 : {money - 3000}")
+    else: 
+        print("걸어서 귀가합니다")  
+elif money >= 2000:
+    print("버스를 타고 귀가합니다")
+    print(f"현재 잔액 : {money - 1000}")
+else:
+    print("걸어서 귀가합니다")
+    
+print()
+
+'''
+    도진이가 택시에 내려서 걸어서 귀가하던 중,
+    집 근처 오락실에서 '철권'게임을 하고 싶어졌습니다
+    회당 500원인 이게임을 몇번이나 할수 있을까요?
+    매번 게임을 진행한 뒤 도준이가 가지고 있는 잔액과 몇번 게임을 했는지 횟수를
+    출력하는 코드를 작성하시오
+    
+    출력 예시)
+    현재까지의 게임한 횟수 : 
+    현재 잔액 : 
+'''
+
+money = 7000
+count = 0
+
+while money>=500:
+    count += 1
+    money -= 500
+    print(f"현재까지의 게임한 횟수 : {count}")
+    print(f"현재 잔액 : {money}")
+    
+print(f"최종 게임 횟수 : {count}")
+print(f"최종 잔액 : {money}")
