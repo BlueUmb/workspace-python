@@ -1,0 +1,40 @@
+
+import requests
+import bs4
+import pandas as pd
+
+page_no = 1
+page_url = f"https://finance.naver.com/sise/sise_index_day.naver?code=KPI200&page={page_no}"
+source = requests.get(page_url).text
+source = bs4.BeautifulSoup(source)
+
+last_url = source.find_all('td', class_ = 'pgRR')[0].find_all("a")[0]['href']
+max_page_no = int(last_url.split('=')[-1])
+print(type(max_page_no))
+print(max_page_no)
+
+price_list = []
+date_list = []
+
+for i in range(page_no,max_page_no+1):
+    page_url = f"https://finance.naver.com/sise/sise_index_day.naver?code=KPI200&page={i}"
+    print(page_url)
+    source = requests.get(page_url).text
+    source = bs4.BeautifulSoup(source) 
+
+    dates = source.find_all('td', class_ = 'date')
+    for date in dates:
+        date_list.append(date.text)
+    
+    #체결가 추출
+    prices = source.find_all('td', class_ = 'number_1')
+    for price in prices[::4]:
+        price_list.append(price.text)
+
+print(f"date_list 개수 : {len(date_list)}개")
+print(f"price_list개수 : {len(price_list)}개")
+
+df = pd.DataFrame(date_list, columns = ['date_list'])
+df['price_list'] = price_list
+
+df.to_csv("test.csv", index = False)
